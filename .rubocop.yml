@@ -1,0 +1,67 @@
+# TODO: Later
+#require:
+# - rubocop-performance
+
+AllCops:
+  NewCops: enable
+
+Layout/DotPosition:
+  EnforcedStyle: trailing
+Layout/HashAlignment:
+  Enabled: false
+Layout/MultilineMethodCallBraceLayout:
+  EnforcedStyle: new_line
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+Layout/ParameterAlignment:
+  EnforcedStyle: with_fixed_indentation
+Layout/SpaceBeforeBlockBraces:
+  EnforcedStyle: no_space
+  EnforcedStyleForEmptyBraces: no_space
+Layout/SpaceInsideBlockBraces:
+  EnforcedStyle: space
+  SpaceBeforeBlockParameters: false
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/*/*.rb'
+    - 'spec/*/*/*.rb'
+    - 'spec/*/*/*/*.rb'
+
+
+Naming/VariableNumber:
+  # EnforcedStyle: snake_case
+  Enabled: false
+
+Style/ClassVars:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Style/ExplicitBlockArgument:
+  Enabled: false
+Style/FormatString:
+  EnforcedStyle: percent
+Style/FormatStringToken:
+  EnforcedStyle: unannotated
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: never
+Style/HashTransformValues:
+  Enabled: false
+Style/MultilineBlockChain:
+  Exclude:
+    - 'spec/*/*.rb'
+    - 'spec/*/*/*.rb'
+    - 'spec/*/*/*/*.rb'
+Style/NumericLiterals:
+  Enabled: false
+Style/OptionalBooleanParameter:
+  Enabled: false
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    default: '[]'
+    '%i': '[]'
+    '%w': '()'
+Style/PerlBackrefs:
+  Enabled: false
+Style/RegexpLiteral:
+  AllowInnerSlashes: true
