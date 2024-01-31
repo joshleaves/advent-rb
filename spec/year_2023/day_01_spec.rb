@@ -1,6 +1,6 @@
 require 'year_2023/day_01'
 
-RSpec.describe Year2023::Day01 do
+describe Year2023::Day01 do
   context 'Part 1' do
     subject do
       Year2023::Day01.new(File.read('spec/year_2023/day_01_sample_one'), true)
