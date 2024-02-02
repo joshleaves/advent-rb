@@ -18,9 +18,9 @@ jobs:
       - name: Install RuboCop
         run: gem install rubocop
       - name: Install RSpec
-        run: gem install rspec
+        run: gem install rspec && gem install rspec-github-actions-formatter
       - name: Check code with RuboCop
-        run: rubocop .
+        run: rubocop . --format github
       - name: Check code with RSpec
-        run: rspec .
+        run: rspec . --format RspecGithubActionsFormatter
       - run: echo "🍏 This job's status is ${{ job.status }}."
