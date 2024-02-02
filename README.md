@@ -6,6 +6,10 @@ Consistency is hard without proper goals to set a good (let's dare say "atomic")
 
 I'm also adding notes that may be useful if you're learning Ruby.
 
+Notes for solving:
+* [2015, up to day 01](year_2015.md)
+* [2023, up to day 03](year_2023.md)
+
 # How to use
 Install [RSpec](https://github.com/rspec/rspec-metagem) with `gem install rspec` and run `rspec` in the root directory.
 
