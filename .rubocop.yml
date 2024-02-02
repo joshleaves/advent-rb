@@ -7,8 +7,13 @@ AllCops:
 
 Layout/DotPosition:
   EnforcedStyle: trailing
+Layout/ElseAlignment:
+  Enabled: false
+Layout/EndAlignment:
+  Enabled: false
 Layout/HashAlignment:
   Enabled: false
+
 Layout/MultilineMethodCallBraceLayout:
   EnforcedStyle: new_line
 Layout/MultilineMethodCallIndentation:
