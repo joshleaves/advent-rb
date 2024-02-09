@@ -34,25 +34,18 @@ class Year2023
 
         range_above = above&.range_got_symbol?(diagonal_left, diagonal_right)
         range_below = below&.range_got_symbol?(diagonal_left, diagonal_right)
-        # puts "-> ABOVE: #{above&.line[diagonal_left, diagonal_right]} => #{range_above}" if above
-        # puts "-> BELOW: #{below&.line[diagonal_left, diagonal_right]} => #{range_below}" if below
         range_left = idx.zero? ? false : range_got_symbol?(idx - 1, 1)
         range_right = range_got_symbol?(idx + number_part_length, 1)
-        # puts "->  LEFT: #{idx.zero? ? false : line[idx - 1, 1]} => #{range_left}"
-        # puts "-> RIGHT: #{line[idx + number_part_length, 1]} => #{range_right}"
 
         [range_above, range_below, range_left, range_right].any?(true)
       end
 
       def cleanup(previous_line, next_line)
         idx = 0
-        # puts ""
-        # puts "__#{line}__"
         while @line[idx]
           next idx += 1 unless @line[idx] =~ /\d/
 
           number_part_length = find_group_length(idx)
-          # puts "NUM: _#{line[idx, number_part_length]}_"
           got_match = number_part_is_island?(idx, number_part_length, previous_line, next_line)
           erase_range(idx, number_part_length) unless got_match
 
