@@ -33,7 +33,6 @@ Metrics/BlockLength:
     - 'spec/*/*/*.rb'
     - 'spec/*/*/*/*.rb'
 
-
 Naming/VariableNumber:
   # EnforcedStyle: snake_case
   Enabled: false
