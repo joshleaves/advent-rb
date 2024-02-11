@@ -6,12 +6,12 @@ class Year2023
       attr_reader :line
 
       RED_MAX = 12
-      RED_REG = /(\d+) red/.freeze
+      RED_REG = /(\d+) red/
       GREEN_MAX = 13
-      GREEN_REG = /(\d+) green/.freeze
+      GREEN_REG = /(\d+) green/
       BLUE_MAX = 14
-      BLUE_REG = /(\d+) blue/.freeze
-      ID_REG = /^Game (\d+):/.freeze
+      BLUE_REG = /(\d+) blue/
+      ID_REG = /^Game (\d+):/
 
       def initialize(input_line)
         @line = input_line

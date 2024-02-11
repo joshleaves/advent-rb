@@ -1,8 +1,8 @@
 class Year2015
   class Day06
-    CAPTURE_ONE = /(turn on|turn off|toggle) (\d+,\d+) through (\d+,\d+)/.freeze
+    CAPTURE_ONE = /(turn on|turn off|toggle) (\d+,\d+) through (\d+,\d+)/
 
-    def modify_lines(from, to, &_block)
+    def modify_lines(from, to)
       from_x, from_y = from.split(',').map(&:to_i)
       to_x, to_y = to.split(',').map(&:to_i)
       from_x.upto(to_x) do |i|

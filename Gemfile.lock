@@ -5,8 +5,6 @@ GEM
     diff-lcs (1.5.1)
     json (2.7.1)
     language_server-protocol (3.17.0.3)
-    nyan-cat-formatter (0.12.0)
-      rspec (>= 2.99, >= 2.14.2, < 4)
     parallel (1.24.0)
     parser (3.3.0.5)
       ast (~> 2.4.1)
@@ -60,12 +58,14 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  nyan-cat-formatter
   rspec
   rspec-github-actions-formatter
   rubocop
   rubocop-performance
   rubocop-rspec
 
+RUBY VERSION
+   ruby 3.3.0p0
+
 BUNDLED WITH
-   2.2.3
+   2.5.6
