@@ -1,12 +1,8 @@
 require 'year_2015/day_07'
 
 describe Year2015::Day07 do
-  context 'Part 1' do
-    subject do
-      Year2015::Day07.new(File.read('spec/year_2015/day_07_sample_one'), true)
-    end
-
-    it 'assigns values to wires' do
+  context 'when Part 1' do
+    subject(:sample_one) do
       {
         'd' => 72,
         'e' => 507,
@@ -16,25 +12,31 @@ describe Year2015::Day07 do
         'i' => 65079,
         'x' => 123,
         'y' => 456
-      }.each do |wire, value|
-        expect(subject.wires[wire].to_i).to eq(value)
+      }
+    end
+
+    it 'assigns values to wires' do
+      circuit = described_class.new(File.read('spec/year_2015/day_07_sample_one'), true)
+
+      sample_one.each do |wire, value|
+        expect(circuit.wires[wire].to_i).to eq(value)
       end
     end
   end
 
-  context 'Results' do
-    subject do
+  context 'when Results' do
+    subject(:input_data) do
       File.read('spec/year_2015/day_07_input')
     end
 
     it 'correctly answers part 1' do
-      expect(Year2015::Day07.new(subject, true).wires['a'].to_i).to eq(46065)
+      expect(described_class.new(input_data, true).wires['a'].to_i).to eq(46065)
     end
 
     it 'correctly answers part 2' do
-      machine = Year2015::Day07.new(subject)
-      machine.wires['b'].instance_eval{ @to_i = 46065 }
-      expect(machine.wires['a'].to_i).to eq(14134)
+      circuit = described_class.new(input_data)
+      circuit.wires['b'].instance_eval{ @to_i = 46065 }
+      expect(circuit.wires['a'].to_i).to eq(14134)
     end
   end
 end

@@ -37,7 +37,7 @@ class Year2015
     end
 
     def to_i
-      @to_i ||= @input_file.scan(/-?\d+/).map(&:to_i).inject(&:+) || 0
+      @to_i ||= @input_file.scan(/-?\d+/).sum(&:to_i) || 0
     end
 
     def to_s

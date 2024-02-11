@@ -20,7 +20,7 @@ class Year2015
       when 'v', '^'
         character[1] += move_vertical(move_direction)
       end
-      send("#{key}=", character)
+      send(:"#{key}=", character)
     end
 
     def move_horizontal(move_direction)

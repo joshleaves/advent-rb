@@ -52,7 +52,7 @@ class Year2015
     def to_i
       return @lights.flatten.count(true) if @version == 1
 
-      @lights.flatten.inject(&:+)
+      @lights.flatten.sum
     end
   end
 end

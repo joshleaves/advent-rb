@@ -43,9 +43,9 @@ class Year2015
     end
 
     def to_i
-      return @lines.map(&:quantity).inject(&:+) if version == 2
+      return @lines.sum(&:quantity) if version == 2
 
-      @lines.map(&:to_i).inject(&:+)
+      @lines.sum(&:to_i)
     end
   end
 end

@@ -70,7 +70,7 @@ class Year2023
     end
 
     def to_i
-      @lines.map(&:to_i).inject(&:+)
+      @lines.sum(&:to_i)
     end
   end
 end

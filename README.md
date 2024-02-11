@@ -11,7 +11,7 @@ Notes for solving:
 * [2023, up to day 03](year_2023.md)
 
 # How to use
-Install [RSpec](https://github.com/rspec/rspec-metagem) with `gem install rspec` and run `rspec` in the root directory.
+Install dependencies with `bundle install`. If you are in a hurry, just install [RSpec](https://github.com/rspec/rspec-metagem) with `gem install rspec` and run `rspec` in the root directory.
 
 # Testing guidelines
 The tests are written with [Test-driven Development](https://en.wikipedia.org/wiki/Test-driven_development) principles by using the input and results provided by each exercise's samples. The  full input is then used in the tests, and the expected results are validated on the website.

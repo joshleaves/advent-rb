@@ -11,7 +11,7 @@ class Year2023
 
       def find_group_length(idx)
         return 0 unless @line[idx]
-        return 0 unless @line[idx] =~ /\d/
+        return 0 unless @line[idx].match?(/\d/)
 
         1 + find_group_length(idx + 1)
       end
@@ -43,7 +43,7 @@ class Year2023
       def cleanup(previous_line, next_line)
         idx = 0
         while @line[idx]
-          next idx += 1 unless @line[idx] =~ /\d/
+          next idx += 1 unless @line[idx].match?(/\d/)
 
           number_part_length = find_group_length(idx)
           got_match = number_part_is_island?(idx, number_part_length, previous_line, next_line)
@@ -54,7 +54,7 @@ class Year2023
       end
 
       def to_i
-        @line.scan(/\d+/).map(&:to_i).inject(&:+) || 0
+        @line.scan(/\d+/).sum(&:to_i) || 0
       end
     end
 
@@ -100,7 +100,7 @@ class Year2023
 
         gear_above, gear_below = find_gears_vertical(above, below, diagonal_left, diagonal_right)
         gear_left, gear_right = find_gears_horizontal(idx, number_part_length)
-        return false unless [gear_above, gear_below, gear_left, gear_right].any?{|x| x.is_a?(Numeric) }
+        return false unless [gear_above, gear_below, gear_left, gear_right].any?(Numeric)
 
         add_gears_vertical(line[idx, number_part_length].to_i, diagonal_left, gear_above, gear_below)
         add_gears_horizontal(line[idx, number_part_length].to_i, idx, number_part_length, gear_left, gear_right)
@@ -130,18 +130,18 @@ class Year2023
     end
 
     def to_i
-      return to_i_v2 if @version == 2
+      return complicated_to_i if @version == 2
 
-      @lines.map(&:to_i).compact.inject(&:+)
+      @lines.filter_map(&:to_i).sum || 0
     end
 
-    def to_i_v2
-      all_lines = @lines.map(&:numbers).inject(&:+).group_by(&:last)
-      all_lines.map do |_position, values|
+    def complicated_to_i
+      all_lines = @lines.flat_map(&:numbers).group_by(&:last)
+      all_lines.sum do |_position, values|
         next 0 unless values.length == 2
 
         values[0].first * values[1].first
-      end.inject(&:+)
+      end || 0
     end
   end
 end

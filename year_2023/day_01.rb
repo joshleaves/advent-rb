@@ -25,14 +25,14 @@ class Year2023
 
       def first_digit
         fd = @line[/\d|one|two|three|four|five|six|seven|eight|nine/]
-        return fd if fd =~ /\d/
+        return fd if fd.match?(/\d/)
 
         NUMBERS[fd]
       end
 
       def last_digit
         ld = @line[/.*(\d|one|two|three|four|five|six|seven|eight|nine).*?$/, 1]
-        return ld.to_s if ld =~ /\d/
+        return ld.to_s if ld.match?(/\d/)
 
         NUMBERS[ld].to_s
       end
@@ -46,7 +46,7 @@ class Year2023
     end
 
     def to_i
-      @lines.map(&:to_i).inject(&:+)
+      @lines.sum(&:to_i)
     end
   end
 end

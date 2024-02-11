@@ -17,7 +17,7 @@ class Year2015
     end
 
     def worst_path
-      @worst_path ||= @version == 1 ? paths.values.inject(&:+) : 0
+      @worst_path ||= @version == 1 ? paths.values.sum : 0
     end
 
     def best_path

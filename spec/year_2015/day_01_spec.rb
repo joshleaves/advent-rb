@@ -1,10 +1,8 @@
 require 'year_2015/day_01'
 
 describe Year2015::Day01 do
-  subject{ Year2015::Day01 }
-
-  context 'Part 1' do
-    it 'gives a final result' do
+  context 'when Part 1' do
+    subject(:sample_one) do
       {
         '(())' => 0,
         '()()' => 0,
@@ -15,34 +13,42 @@ describe Year2015::Day01 do
         '))(' => -1,
         ')))' => -3,
         ')())())' => -3
-      }.each do |input, result|
-        expect(subject.new(input, true).to_i).to eq(result)
+      }
+    end
+
+    it 'gives a final result' do
+      sample_one.each do |input, result|
+        expect(described_class.new(input, true).to_i).to eq(result)
       end
     end
   end
 
-  context 'Part 2' do
-    it 'gives a final result' do
+  context 'when Part 2' do
+    subject(:sample_two) do
       {
         ')' => 1,
         '()())' => 5
-      }.each do |input, result|
-        expect(subject.new(input).to_i).to eq(result)
+      }
+    end
+
+    it 'gives a final result' do
+      sample_two.each do |input, result|
+        expect(described_class.new(input).to_i).to eq(result)
       end
     end
   end
 
-  context 'Results' do
-    subject do
+  context 'when Results' do
+    subject(:day_01_input) do
       File.read('spec/year_2015/day_01_input')
     end
 
     it 'correctly answers part 1' do
-      expect(Year2015::Day01.new(subject, true).to_i).to eq(138)
+      expect(described_class.new(day_01_input, true).to_i).to eq(138)
     end
 
     it 'correctly answers part 2' do
-      expect(Year2015::Day01.new(subject).to_i).to eq(1771)
+      expect(described_class.new(day_01_input).to_i).to eq(1771)
     end
   end
 end

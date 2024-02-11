@@ -48,15 +48,15 @@ class Year2015
     end
 
     def code
-      lines.map(&:code).inject(&:+)
+      lines.sum(&:code)
     end
 
     def memory
-      lines.map(&:memory).inject(&:+)
+      lines.sum(&:memory)
     end
 
     def dumped
-      lines.map(&:dumped).inject(&:+)
+      lines.sum(&:dumped)
     end
 
     def to_i

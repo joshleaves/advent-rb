@@ -12,13 +12,10 @@ jobs:
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
       - name: Install Ruby
-        uses: ruby/setup-ruby@ec02537da5712d66d4d50a0f33b7eb52773b5ed1
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.1' # Not needed with a .ruby-version file
-      - name: Install RuboCop
-        run: gem install rubocop
-      - name: Install RSpec
-        run: gem install rspec && gem install rspec-github-actions-formatter
+          bundler-cache: true
       - name: Check code with RuboCop
         run: rubocop . --format github
       - name: Check code with RSpec

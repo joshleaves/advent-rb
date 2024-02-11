@@ -1,36 +1,37 @@
 require 'year_2015/day_11'
 
 describe Year2015::Day11 do
-  context 'Part 1' do
-    subject do
-      Year2015::Day11
+  context 'when Part 1' do
+    subject(:password_class) do
+      described_class::Password
     end
 
     it 'checks first criteria (three straight letters)' do
-      expect(subject::Password.new('hijklmmn').first_criteria?).to be_truthy
-      expect(subject::Password.new('abbceffg').first_criteria?).to be_falsey
-      expect(subject::Password.new('abbcegjk').first_criteria?).to be_falsey
+      { 'hijklmmn' => :to, 'abbceffg' => :not_to, 'abbcegjk' => :not_to }.each do |input, result|
+        expect(password_class.new(input)).send(result, be_first_criteria)
+      end
     end
 
     it 'checks second criteria (no i/o/l)' do
-      expect(subject::Password.new('hijklmmn').second_criteria?).to be_falsey
-      expect(subject::Password.new('abbceffg').second_criteria?).to be_truthy
-      expect(subject::Password.new('abbcegjk').second_criteria?).to be_truthy
+      { 'hijklmmn' => :not_to, 'abbceffg' => :to, 'abbcegjk' => :to }.each do |input, result|
+        expect(password_class.new(input)).send(result, be_second_criteria)
+      end
     end
 
     it 'checks third criteria (two different pairs)' do
-      expect(subject::Password.new('hijklmmn').third_criteria?).to be_falsey
-      expect(subject::Password.new('abbceffg').third_criteria?).to be_truthy
-      expect(subject::Password.new('abbcegjk').third_criteria?).to be_falsey
+      { 'hijklmmn' => :not_to, 'abbceffg' => :to, 'abbcegjk' => :not_to }.each do |input, result|
+        expect(password_class.new(input)).send(result, be_third_criteria)
+      end
     end
 
     it 'gives a final result' do
-      expect(subject.new('abcdefgh').to_s).to eq('abcdffaa')
-      expect(subject.new('ghijklmn').to_s).to eq('ghjaabcc')
+      { 'abcdefgh' => 'abcdffaa', 'ghijklmn' => 'ghjaabcc' }.each do |input, result|
+        expect(described_class.new(input).to_s).to eq(result)
+      end
     end
   end
 
-  context 'Results' do
+  context 'when Results' do
     it 'correctly answers part 1' do
       expect(described_class.new('vzbxkghb').to_s).to eq('vzbxxyzz')
     end

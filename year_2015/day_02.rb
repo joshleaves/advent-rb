@@ -39,7 +39,7 @@ class Year2015
           3 * area_small,
           2 * area_med,
           2 * area_large
-        ].inject(&:+)
+        ].sum
       end
     end
 
@@ -49,7 +49,7 @@ class Year2015
           height * 2,
           width * 2,
           height * width * length
-        ].inject(&:+)
+        ].sum
       end
     end
 
@@ -62,7 +62,7 @@ class Year2015
     end
 
     def to_i
-      @lines.map(&:to_i).inject(&:+)
+      @lines.sum(&:to_i)
     end
   end
 end

@@ -6,9 +6,9 @@ class Year2015
       end
 
       def nice?
-        return false unless @line =~ /[aeiou].*?[aeiou].*?[aeiou]/
-        return false unless @line =~ /(.)\1/
-        return false if @line =~ /(ab|cd|pq|xy)/
+        return false unless @line.match?(/[aeiou].*?[aeiou].*?[aeiou]/)
+        return false unless @line.match?(/(.)\1/)
+        return false if @line.match?(/(ab|cd|pq|xy)/)
 
         true
       end
@@ -16,8 +16,8 @@ class Year2015
 
     class LinePartTwo < Line
       def nice?
-        return false unless @line =~ /(.{2}).*?\1/
-        return false unless @line =~ /(.).\1/
+        return false unless @line.match?(/(.{2}).*?\1/)
+        return false unless @line.match?(/(.).\1/)
 
         true
       end
@@ -31,7 +31,7 @@ class Year2015
     end
 
     def to_i
-      @lines.select(&:nice?).length
+      @lines.count(&:nice?)
     end
   end
 end
