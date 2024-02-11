@@ -39,16 +39,16 @@ describe Year2015::Day01 do
   end
 
   context 'when Results' do
-    subject(:day_01_input) do
+    subject(:input_data) do
       File.read('spec/year_2015/day_01_input')
     end
 
     it 'correctly answers part 1' do
-      expect(described_class.new(day_01_input, true).to_i).to eq(138)
+      expect(described_class.new(input_data, true).to_i).to eq(138)
     end
 
     it 'correctly answers part 2' do
-      expect(described_class.new(day_01_input).to_i).to eq(1771)
+      expect(described_class.new(input_data).to_i).to eq(1771)
     end
   end
 end
