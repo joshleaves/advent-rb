@@ -37,7 +37,7 @@ class Year2015
 
     def mark_forbidden_ranges_for_property(prop, positive)
       @ingredients.select{|ingredient| ingredient.send(prop).negative? }.each do |ingredient|
-        other_forbidden = calculate_forbidden_range(positive, ingredient.send(prop))
+        other_forbidden = calculate_forbidden_range(positive, ingredient.send(prop)) - 1
         ingredient.forbidden = [ingredient.forbidden, other_forbidden].min
       end
     end
@@ -55,9 +55,7 @@ class Year2015
       total = quantities.each_with_index.sum do |quantity, i|
         quantity * @ingredients[i].send(symbol)
       end
-      return 0 if total.negative?
-
-      total
+      [0, total].max
     end
 
     def score(quantities)
@@ -69,23 +67,31 @@ class Year2015
     def quantities_enumerator
       Enumerator.new do |yielder|
         quantities = Array.new(@ingredients.length, 1)
+        quantities[-1] = 101 - quantities.sum
         loop do
-          yielder << quantities
           quantities = update_quantities(quantities, -1)
+          next if @version == 2 && calculate(quantities, :calories) != 500
+
+          yielder << quantities
         end
       end
+    end
+
+    def increment_quantity(quantities, idx)
+      quantities[idx] += 1
+      quantities[idx] = 100 - (quantities.sum - quantities[idx]) if idx == -1 && quantities.sum < 100
+      quantities[idx] = 100 if quantities[idx] > @ingredients[idx].forbidden
     end
 
     def update_quantities(quantities, idx = -1)
       raise StopIteration if quantities[idx].nil?
 
-      quantities[idx] += 1
-      quantities[idx] = 100 if @ingredients[idx].forbidden <= quantities[idx]
-      if quantities[idx] >= 100
+      increment_quantity(quantities, idx)
+      if quantities.sum > 100
         quantities[idx] = 1
         update_quantities(quantities, idx - 1)
+        quantities[idx] = 101 - quantities.sum if idx == -1
       end
-      return update_quantities(quantities, -1) unless quantities.sum == 100
 
       quantities
     end
@@ -94,8 +100,6 @@ class Year2015
       @to_i ||= begin
         @to_i = 0
         quantities_enumerator.each do |quantities|
-          next if @version == 2 && calculate(quantities, :calories) != 500
-
           @to_i = [score(quantities), @to_i].max
         end
         @to_i
