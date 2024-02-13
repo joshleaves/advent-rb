@@ -1,30 +1,37 @@
 class Year2015
   class Day10
-    def iterations(desired_iteration = -1)
-      look_and_say until @inner_iterations.length > desired_iteration
-      @inner_iterations[desired_iteration]
+    def iterations(desired_iteration = 0)
+      return @current_data if desired_iteration < @iteration
+
+      look_and_say while @iteration < desired_iteration
+      @current_data
     end
 
     def look_and_say
-      starter = @inner_iterations.last
-      next_iteration = starter.each_char.with_object([starter[0], 0]) do |char, memo|
-        if char == memo[-2]
-          memo[-1] += 1
+      @current_data = @current_data.each_with_object([0, @current_data[0]]) do |char, memo|
+        if char == memo[-1]
+          memo[-2] += 1
           next memo
         end
-        memo.push(char, 1)
+        memo.push(1, char)
         memo
-      end.each_slice(2).map(&:reverse).flatten.map(&:to_s).join
+      end.flatten
 
-      @inner_iterations.push(next_iteration)
+      @iteration += 1
     end
 
     def initialize(input_data)
-      @inner_iterations = [input_data]
+      @iteration = 0
+      @current_data = input_data.chars.map(&:to_i)
+    end
+
+    def to_s(desired_iteration = -1)
+      iterations(desired_iteration).map(&:to_s).join
     end
 
     def to_i(desired_iteration = -1)
-      iterations(desired_iteration).length
+      iterations(desired_iteration)
+      @current_data.length
     end
   end
 end
