@@ -11,7 +11,7 @@ class Year2015
       #   end
       # end
       @current_text = input_data.map do |input_line|
-        input_line
+        input_line.chars.map{|x| x == '#' }
       end
       add_corners if @version == 2
     end
@@ -73,7 +73,7 @@ class Year2015
       return false unless @current_text[x_axis]
       return false unless @current_text[x_axis][y_axis]
 
-      @current_text[x_axis][y_axis] == '#'
+      @current_text[x_axis][y_axis]
     end
 
     def alive_neighbors_for(x_axis, y_axis)
@@ -91,30 +91,28 @@ class Year2015
     end
 
     def alive_next?(current_status, x_axis, y_axis)
-      # return true if @version == 2 && corner?(x_axis, y_axis)
-
       case alive_neighbors_for(x_axis, y_axis)
       when 3
         true
       when 2
-        current_status == '#'
+        current_status == true
       else
         false
       end
     end
 
     def add_corners
-      @current_text[0][0] = '#'
-      @current_text[0][@size - 1] = '#'
-      @current_text[@size - 1][0] = '#'
-      @current_text[@size - 1][@size - 1] = '#'
+      @current_text[0][0] = true
+      @current_text[0][-1] = true
+      @current_text[-1][0] = true
+      @current_text[-1][-1] = true
     end
 
     def do_one_step
       @next_step_text = @current_text.each_with_index.map do |line, x_axis|
-        line.each_char.with_index.map do |char, y_axis|
-          alive_next?(char, x_axis, y_axis) ? '#' : '.'
-        end.join
+        line.each_with_index.map do |char, y_axis|
+          alive_next?(char, x_axis, y_axis)
+        end
       end
       @current_text = @next_step_text
       add_corners if @version == 2
@@ -129,11 +127,13 @@ class Year2015
     end
 
     def to_i
-      to_s.each_char.count{|char| char == '#' }
+      @current_text.flatten.count{|cell| cell == true }
     end
 
     def to_s
-      @current_text.join("\n")
+      @current_text.map do |line|
+        line.map{|cell| cell ? '#' : '.' }.join
+      end.join("\n")
     end
   end
 end
