@@ -7,18 +7,11 @@ AllCops:
 
 RSpec/FilePath:
   SpecSuffixOnly: true
-  #Enabled: false
 RSpec/SpecFilePathFormat:
   Enabled: false
 
 Layout/DotPosition:
   EnforcedStyle: trailing
-Layout/ElseAlignment:
-  Enabled: false
-Layout/EndAlignment:
-  Enabled: false
-Layout/HashAlignment:
-  Enabled: false
 
 Layout/MultilineMethodCallBraceLayout:
   EnforcedStyle: new_line
@@ -33,22 +26,10 @@ Layout/SpaceInsideBlockBraces:
   EnforcedStyle: space
   SpaceBeforeBlockParameters: false
 
-Style/ClassVars:
-  Enabled: false
 Style/Documentation:
   Enabled: false
-Style/ExplicitBlockArgument:
-  Enabled: false
-Style/FormatString:
-  EnforcedStyle: percent
-Style/FormatStringToken:
-  EnforcedStyle: unannotated
 Style/FrozenStringLiteralComment:
   EnforcedStyle: never
-Style/HashTransformValues:
-  Enabled: false
-Style/NumericLiterals:
-  Enabled: false
 Style/OptionalBooleanParameter:
   Enabled: false
 Style/PercentLiteralDelimiters:

@@ -8,8 +8,8 @@ describe Year2015::Day07 do
         'e' => 507,
         'f' => 492,
         'g' => 114,
-        'h' => 65412,
-        'i' => 65079,
+        'h' => 65_412,
+        'i' => 65_079,
         'x' => 123,
         'y' => 456
       }
@@ -30,13 +30,13 @@ describe Year2015::Day07 do
     end
 
     it 'correctly answers part 1' do
-      expect(described_class.new(input_data, true).wires['a'].to_i).to eq(46065)
+      expect(described_class.new(input_data, true).wires['a'].to_i).to eq(46_065)
     end
 
     it 'correctly answers part 2' do
       circuit = described_class.new(input_data)
-      circuit.wires['b'].instance_eval{ @to_i = 46065 }
-      expect(circuit.wires['a'].to_i).to eq(14134)
+      circuit.wires['b'].instance_eval{ @to_i = 46_065 }
+      expect(circuit.wires['a'].to_i).to eq(14_134)
     end
   end
 end

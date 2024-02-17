@@ -42,7 +42,7 @@ describe Year2023::Day03 do
     end
 
     it 'gives a final result' do
-      expect(sample_two.to_i).to eq(467835)
+      expect(sample_two.to_i).to eq(467_835)
       # expect(described_class.new(File.read('spec/year_2023/day_03_sample_one-bis')).to_i).to eq(6756)
       # expect(described_class.new(File.read('spec/year_2023/day_03_sample_one-ter')).to_i).to eq(6756)
     end
@@ -54,11 +54,11 @@ describe Year2023::Day03 do
     end
 
     it 'correctly answers part 1' do
-      expect(described_class.new(input_data, true).to_i).to eq(540212)
+      expect(described_class.new(input_data, true).to_i).to eq(540_212)
     end
 
     it 'correctly answers part 2' do
-      expect(described_class.new(input_data).to_i).to eq(87605697)
+      expect(described_class.new(input_data).to_i).to eq(87_605_697)
     end
   end
 end

@@ -85,7 +85,7 @@ describe Year2023::Day02 do
     end
 
     it 'correctly answers part 2' do
-      expect(described_class.new(input_data).to_i).to eq(70950)
+      expect(described_class.new(input_data).to_i).to eq(70_950)
     end
   end
 end

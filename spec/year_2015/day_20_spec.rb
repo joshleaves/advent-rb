@@ -9,11 +9,11 @@ describe Year2015::Day20 do
 
   context 'when Results' do
     it 'correctly answers part 1' do
-      expect(described_class.new(831000, 36000000, true).to_i).to eq(831600)
+      expect(described_class.new(831_000, 36_000_000, true).to_i).to eq(831_600)
     end
 
     it 'correctly answers part 2' do
-      expect(described_class.new(884000, 36000000).to_i).to eq(884520)
+      expect(described_class.new(884_000, 36_000_000).to_i).to eq(884_520)
     end
   end
 end

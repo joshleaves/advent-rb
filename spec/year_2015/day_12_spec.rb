@@ -45,11 +45,11 @@ describe Year2015::Day12 do
     end
 
     it 'correctly answers part 1' do
-      expect(described_class.new(input_data, true).to_i).to eq(111754)
+      expect(described_class.new(input_data, true).to_i).to eq(111_754)
     end
 
     it 'correctly answers part 2' do
-      expect(described_class.new(input_data).to_i).to eq(65402)
+      expect(described_class.new(input_data).to_i).to eq(65_402)
     end
   end
 end

@@ -17,7 +17,7 @@ class Year2015
       @input_file = input_data
       @version = input_part_one ? 1 : 2
       @aunts = input_data.chomp.split("\n").each_with_index.map do |input_line, i|
-        { 'idx' => i + 1 }.merge(input_line.scan(/(\w+): (\d+)/).to_h{|k, v| [k, v.to_i] })
+        { 'idx' => i + 1 }.merge(input_line.scan(/(\w+): (\d+)/).to_h.transform_values(&:to_i))
       end
     end
 

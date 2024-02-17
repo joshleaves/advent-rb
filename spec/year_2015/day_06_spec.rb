@@ -7,7 +7,7 @@ describe Year2015::Day06 do
     end
 
     it 'gives a final result' do
-      expect(sample_one.to_i).to eq(998996)
+      expect(sample_one.to_i).to eq(998_996)
     end
   end
 
@@ -17,7 +17,7 @@ describe Year2015::Day06 do
     end
 
     it 'gives a final result' do
-      expect(sample_two.to_i).to eq(2000001)
+      expect(sample_two.to_i).to eq(2_000_001)
     end
   end
 
@@ -27,11 +27,11 @@ describe Year2015::Day06 do
     end
 
     it 'correctly answers part 1' do
-      expect(described_class.new(input_data, true).to_i).to eq(400410)
+      expect(described_class.new(input_data, true).to_i).to eq(400_410)
     end
 
     it 'correctly answers part 2' do
-      expect(described_class.new(input_data).to_i).to eq(15343601)
+      expect(described_class.new(input_data).to_i).to eq(15_343_601)
     end
   end
 end

@@ -16,11 +16,11 @@ describe Year2015::Day10 do
     end
 
     it 'correctly answers part 1' do
-      expect(input_data.to_i(40)).to eq(252594)
+      expect(input_data.to_i(40)).to eq(252_594)
     end
 
     it 'correctly answers part 2' do
-      expect(input_data.to_i(50)).to eq(3579328)
+      expect(input_data.to_i(50)).to eq(3_579_328)
     end
   end
 end

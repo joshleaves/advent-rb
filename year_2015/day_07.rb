@@ -46,7 +46,7 @@ class Year2015
 
       class NOT < LogicalGate
         def to_i
-          65535 ^ @inputs[0].to_i
+          65_535 ^ @inputs[0].to_i
         end
       end
     end
