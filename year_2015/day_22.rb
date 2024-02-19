@@ -1,13 +1,5 @@
 class Year2015
   class Day22
-    SPELLS = [
-      ['Magic Missile', 53,  4, 0, 0, 0, 0, :magic_missile],
-      ['Drain',         73,  2, 2, 0, 0, 0, :drain],
-      ['Shield',        113, 0, 0, 6, 0, 0, :effect_shield],
-      ['Poison',        173, 0, 0, 0, 6, 0, :effect_poison],
-      ['Recharge',      229, 0, 0, 0, 0, 5, :effect_recharge]
-    ].freeze
-
     def initialize(input_boss, input_part_one = false)
       @version = input_part_one ? 1 : 2
       @boss = input_boss
@@ -20,7 +12,7 @@ class Year2015
       return if cost >= @least_mana || user_mp.negative?
 
       user_hp -= 1 if @version == 2 && player_turn
-      return if user_hp.negative?
+      return if user_hp <= 0
 
       user_df = effects[0].positive? ? 7 : 0
       boss_hp -= 3 if effects[1].positive?

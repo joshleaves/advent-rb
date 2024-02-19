@@ -13,7 +13,7 @@ describe Year2015::Day22 do
       expect(described_class.new(input_data, true).to_i).to eq(953)
     end
 
-    it 'correctly answers part 2', skip: 'Does not work properly' do
+    it 'correctly answers part 2' do
       expect(described_class.new(input_data).to_i).to eq(1289)
     end
   end
