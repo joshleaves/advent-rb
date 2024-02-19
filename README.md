@@ -13,6 +13,9 @@ Notes for solving:
 # How to use
 Install dependencies with `bundle install`. If you are in a hurry, just install [RSpec](https://github.com/rspec/rspec-metagem) with `gem install rspec` and run `rspec` in the root directory.
 
+# Regarding RuboCop rules
+I use my [own set of rules](.rubocop.yml), which I try to be as close as possible to the official style, but [some rules just don't make sense to me](https://github.com/rubocop/ruby-style-guide/pull/176), and RuboCop's default rules are here to [enforce a single style](https://github.com/rubocop/ruby-style-guide/pull/176#issuecomment-18670208). However, [consistency for the sake of consistency is widely agreed to be plain dumb](https://github.com/rubocop/ruby-style-guide?tab=readme-ov-file#a-note-about-consistency), so I reserve myself the right to disable rules when required.
+
 # Testing guidelines
 The tests are written with [Test-driven Development](https://en.wikipedia.org/wiki/Test-driven_development) principles by using the input and results provided by each exercise's samples. The  full input is then used in the tests, and the expected results are validated on the website.
 
