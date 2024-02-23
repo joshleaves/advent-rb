@@ -59,7 +59,6 @@ class Year2016
 
     def code
       @code ||= @input.split("\n").each_with_object([]) do |line, code|
-        # puts "=> #{code[-1] || '?'} => #{line}"
         result = do_moves(code[-1] || '5', line)
 
         code << result
