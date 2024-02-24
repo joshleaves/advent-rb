@@ -1,9 +1,9 @@
-require 'year_2015/day_04'
+require 'year_2023/day_04'
 
-describe Year2015::Day04 do
+describe Year2023::Day04 do
   context 'when Part 1' do
     subject(:sample_one) do
-      described_class.new(File.read('spec/year_2015/day_04_sample_one'), true)
+      described_class.new(File.read('spec/year_2023/day_04_sample_one'), true)
     end
 
     it 'finds winning numbers' do
@@ -25,7 +25,7 @@ describe Year2015::Day04 do
 
   context 'when Part 2' do
     subject(:sample_two) do
-      described_class.new(File.read('spec/year_2015/day_04_sample_one'))
+      described_class.new(File.read('spec/year_2023/day_04_sample_one'))
     end
 
     it 'distributes cards' do
@@ -41,7 +41,7 @@ describe Year2015::Day04 do
 
   context 'when Results' do
     subject(:input_data) do
-      File.read('spec/year_2015/day_04_input')
+      File.read('spec/year_2023/day_04_input')
     end
 
     it 'correctly answers part 1' do

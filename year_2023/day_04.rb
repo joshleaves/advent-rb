@@ -1,4 +1,4 @@
-class Year2015
+class Year2023
   class Day04
     attr_reader :version, :lines
 
