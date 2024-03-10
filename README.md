@@ -8,7 +8,7 @@ I'm also adding notes that may be useful if you're learning Ruby.
 
 Notes for solving:
 * [2015, complete](year_2015.md)
-* [2016, up to day 15](year_2016.md)
+* [2016, up to day 16](year_2016.md)
 * [2023, up to day 04](year_2023.md)
 
 # How to use
