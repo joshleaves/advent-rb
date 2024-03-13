@@ -94,7 +94,6 @@ class Year2016
     # rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity
 
     def search(states, moves_tried, depth)
-      # puts "DEPTH: #{depth} => #{states.length} (#{moves_tried.length})"
       return depth if states.any?{|state| state.all?(3) }
 
       next_states = []
