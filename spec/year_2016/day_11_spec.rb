@@ -27,7 +27,9 @@ describe Year2016::Day11 do
       expect(described_class.new(input_data, true).solve).to eq(47)
     end
 
-    it 'correctly answers part 2', skip: 'Test is too slow for CI' do
+    it 'correctly answers part 2' do
+      skip('Test is too slow for CI') if ENV['CI']
+
       expect(described_class.new(input_data).solve).to eq(71)
     end
   end

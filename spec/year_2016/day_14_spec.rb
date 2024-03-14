@@ -8,7 +8,9 @@ describe Year2016::Day14 do
   end
 
   context 'when Part 2' do
-    it 'gives a final result', skip: 'Test is too slow for CI' do
+    it 'gives a final result' do
+      skip('Test is too slow for CI') if ENV['CI']
+
       expect(described_class.new('abc').to_i).to eq(22_551)
     end
   end
@@ -22,7 +24,9 @@ describe Year2016::Day14 do
       expect(described_class.new(input_data, true).to_i).to eq(25_427)
     end
 
-    it 'correctly answers part 2', skip: 'Test is too slow for CI' do
+    it 'correctly answers part 2' do
+      skip('Test is too slow for CI') if ENV['CI']
+
       expect(described_class.new(input_data).to_i).to eq(22_045)
     end
   end
