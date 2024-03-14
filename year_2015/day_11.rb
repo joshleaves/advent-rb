@@ -1,30 +1,30 @@
 class Year2015
   class Day11
-    class Password
-      def initialize(input_password)
-        @password = input_password
+    Password = Struct.new(:password) do
+      def chars
+        @chars ||= password.chars
       end
 
       def first_criteria?
-        @password.chars.map(&:ord).each_cons(3) do |str|
-          return true if str[0] + 1 == str[1] && str[1] == str[2] - 1
+        chars.each_cons(3) do |str|
+          return true if str[0].next == str[1] && str[1].next == str[2]
         end
         false
       end
 
       def second_criteria?
-        return false if @password.include?('i')
-        return false if @password.include?('o')
-        return false if @password.include?('l')
-
+        chars.each do |char|
+          return false if char == 'i'
+          return false if char == 'o'
+          return false if char == 'l'
+        end
         true
       end
 
       def third_criteria?
-        return false if @password.chars.uniq.length > 6
-        return false unless (scan = @password.scan(/(.)\1/))
+        return false if chars.uniq.length > 6
 
-        scan.uniq.length > 1
+        chars.each_cons(2).select{|a, b| a == b }.uniq.length > 1
       end
 
       def valid?
@@ -32,7 +32,7 @@ class Year2015
       end
 
       def to_s
-        @password
+        password
       end
     end
 
@@ -44,10 +44,10 @@ class Year2015
 
     def next_password
       next_input = @password.to_s.next
+      next_input = next_input.next while next_input.chars.uniq.length > 6
       next_input = cleanup_iol('i', next_input) if next_input.include?('i')
       next_input = cleanup_iol('o', next_input) if next_input.include?('o')
       next_input = cleanup_iol('l', next_input) if next_input.include?('l')
-      next_input = next_input.next if next_input.chars.uniq.length > 6
 
       next_input
     end

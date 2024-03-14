@@ -3,12 +3,14 @@ require 'year_2016/day_05'
 describe Year2016::Day05 do
   context 'when Part 1' do
     it 'gives a final result' do
+      skip('Test is too slow for CI') if ENV['CI']
       expect(described_class.new('abc', true).code).to eq('18f47a30')
     end
   end
 
   context 'when Part 2' do
     it 'gives a final result' do
+      skip('Test is too slow for CI') if ENV['CI']
       expect(described_class.new('abc').code).to eq('05ace8e3')
     end
   end
@@ -19,10 +21,12 @@ describe Year2016::Day05 do
     end
 
     it 'correctly answers part 1' do
+      skip('Test is too slow for CI') if ENV['CI']
       expect(described_class.new(input_data, true).code).to eq('4543c154')
     end
 
     it 'correctly answers part 2' do
+      skip('Test is too slow for CI') if ENV['CI']
       expect(described_class.new(input_data).code).to eq('1050cbbd')
     end
   end

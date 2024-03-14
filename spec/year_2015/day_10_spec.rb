@@ -3,9 +3,8 @@ require 'year_2015/day_10'
 describe Year2015::Day10 do
   context 'when Part 1' do
     it 'iterates each look-and-say' do
-      iterator = described_class.new('1')
       %w(1 11 21 1211 111221 312211).each_with_index do |result, i|
-        expect(iterator.to_s(i)).to eq(result)
+        expect(described_class.new('1').to_s(i)).to eq(result)
       end
     end
   end

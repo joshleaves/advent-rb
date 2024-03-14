@@ -1,23 +1,7 @@
 class Year2015
   class Day13
-    def interpret_happiness(line)
-      line =~ /(\w+) would (\w+) (\d+) happiness units by sitting next to (\w+)./
-      duet = [$1, $4].sort
-      @happiness[duet] ||= 0
-      @happiness[duet] += $3.to_i * ($2 == 'gain' ? +1 : -1)
-    end
-
-    def add_my_bored_happiness
-      @characters.each do |character|
-        duet = [character, 'ME'].sort
-        @happiness[duet] = 0
-      end
-      @characters.push('ME')
-    end
-
     def initialize(input_data, input_part_one = false)
-      @input_file = input_data
-      @happiness  = {}
+      @happiness = Hash.new{ 0 }
       input_data.chomp.split("\n").each do |line|
         interpret_happiness(line)
       end
@@ -25,32 +9,34 @@ class Year2015
       add_my_bored_happiness unless input_part_one
     end
 
-    def try_next_guest(starter_guest, current_guest, guests, current_happiness, current_best)
-      return current_happiness + @happiness[[current_guest, starter_guest].sort] if guests.empty?
+    def interpret_happiness(line)
+      line =~ /(\w+) would (\w+) (\d+) happiness units by sitting next to (\w+)./
+      duet = [$1, $4]
+      gain = $3.to_i * ($2 == 'gain' ? +1 : -1)
+      @happiness[duet] += gain
+      @happiness[duet.reverse] += gain
+    end
 
-      best_happiness = current_best
-      guests.each do |next_guest|
-        next if next_guest == current_guest
-
-        added = @happiness[[current_guest, next_guest].sort]
-        guests_left = guests - [next_guest]
-        new_best = try_next_guest(starter_guest, next_guest, guests_left, current_happiness + added, best_happiness)
-        best_happiness = [best_happiness, new_best].compact.max
+    def add_my_bored_happiness
+      @characters.each do |character|
+        @happiness[[character, 'ME']] = 0
+        @happiness[['ME', character]] = 0
       end
+      @characters.push('ME')
+    end
 
-      best_happiness
+    def calculate_happiness_for(combination)
+      very_happy = @happiness[[combination.first, combination.last]]
+      combination.each_cons(2) do |duet|
+        very_happy += @happiness[duet]
+      end
+      very_happy
     end
 
     def to_i
-      @to_i ||= begin
-        very_happy = 0
-
-        @characters.each do |starter_guest|
-          new_happy = try_next_guest(starter_guest, starter_guest, @characters - [starter_guest], 0, 0)
-          very_happy = [very_happy, new_happy].max
-        end
-        very_happy
-      end
+      @characters[1..].permutation(@characters.length - 1).map do |combination|
+        calculate_happiness_for([@characters[0]] + combination)
+      end.max
     end
   end
 end

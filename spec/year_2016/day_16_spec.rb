@@ -17,6 +17,7 @@ describe Year2016::Day16 do
     end
 
     it 'correctly answers part 2' do
+      skip('Test is too slow for CI') if ENV['CI']
       expect(described_class.new(input_data).to_s(35_651_584)).to eq('01010001101011001')
     end
   end

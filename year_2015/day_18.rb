@@ -1,133 +1,74 @@
 class Year2015
   class Day18
+    CORNERS = [
+      [0, 0],
+      [0, -1],
+      [-1, 0],
+      [-1, -1]
+    ].freeze
+
     def initialize(input_data, input_part_one = false)
       input_data = input_data.chomp.split("\n")
       @size = input_data[0].length
       @version = input_part_one ? 1 : 2
-      # @current_iteration_set = []
-      # @current_text = input_data.each_with_index do |input_line, i|
-      #   input_line.each_char.with_index do |input_char, j|
-      #     @current_iteration_set.push([i, j]) if input_char == '#'
-      #   end
-      # end
       @current_text = input_data.map do |input_line|
         input_line.chars.map{|x| x == '#' }
       end
       add_corners if @version == 2
     end
 
-    # def alive_now?(x_axis, y_axis)
-    #   # return false if x_axis.negative? || x_axis >= @size
-    #   # return false if y_axis.negative? || y_axis >= @size
+    def alive_neighbors_for_updown(x_axis, y_axis)
+      return 0 if x_axis.negative? || x_axis >= @size
 
-    #   @current_iteration_set.include?([x_axis, y_axis])
-    # end
-
-    # def alive_neighbors_for(x_axis, y_axis)
-    #   [
-    #     [x_axis - 1, y_axis - 1], [x_axis, y_axis - 1], [x_axis + 1, y_axis - 1],
-    #     [x_axis - 1, y_axis],                           [x_axis + 1, y_axis],
-    #     [x_axis - 1, y_axis + 1], [x_axis, y_axis + 1], [x_axis + 1, y_axis + 1]
-    #   ].count do |x, y|
-    #     alive_now?(x, y)
-    #   end
-    # end
-    #
-    # def alive_next?(x_axis, y_axis)
-    #   case alive_neighbors_for(x_axis, y_axis)
-    #   when 3
-    #     true
-    #   when 2
-    #     alive_now?(x_axis, y_axis)
-    #   else
-    #     false
-    #   end
-    # end
-    #
-    # def do_one_step
-    #   @next_iteration_set = []
-    #   0.upto(@size - 1) do |i|
-    #     # puts "CHECK ITERATION #{i}"
-    #     0.upto(@size - 1) do |j|
-    #       @next_iteration_set.push([i, j]) if alive_next?(i, j)
-    #     end
-    #   end
-    #   @current_iteration_set = @next_iteration_set
-    # end
-    #
-    # def to_s
-    #   0.upto(@size - 1).map do |i|
-    #     0.upto(@size - 1).map do |j|
-    #       alive_now?(i, j) ? '#' : '.'
-    #     end.join
-    #   end.join("\n")
-    # end
-    #
-    # def to_i
-    #   @current_iteration_set.length
-    # end
-
-    def cell_is_currently_alive?(x_axis, y_axis)
-      return false if x_axis.negative?
-      return false if y_axis.negative?
-      return false unless @current_text[x_axis]
-      return false unless @current_text[x_axis][y_axis]
-
-      @current_text[x_axis][y_axis]
+      from = [0, y_axis - 1].max
+      to = [@size - 1, y_axis + 1].min
+      @current_text[x_axis][from..to].count(true)
     end
 
-    def alive_neighbors_for(x_axis, y_axis)
+    def alive_neighbors_for_lr(x_axis, y_axis)
+      cells = []
+      cells << @current_text[x_axis][y_axis - 1] unless y_axis.zero?
+      cells << @current_text[x_axis][y_axis + 1] unless y_axis + 1 >= @size
+      cells.count(true)
+    end
+
+    def alive_neighbors_for_alt(x_axis, y_axis)
       [
-        [x_axis - 1, y_axis - 1], [x_axis, y_axis - 1], [x_axis + 1, y_axis - 1],
-        [x_axis - 1, y_axis],                           [x_axis + 1, y_axis],
-        [x_axis - 1, y_axis + 1], [x_axis, y_axis + 1], [x_axis + 1, y_axis + 1]
-      ].count do |x, y|
-        cell_is_currently_alive?(x, y)
-      end
-    end
-
-    def corner?(x_axis, y_axis)
-      (x_axis.zero? || x_axis == (@size - 1)) && (y_axis.zero? || y_axis == (@size - 1))
-    end
-
-    def alive_next?(current_status, x_axis, y_axis)
-      case alive_neighbors_for(x_axis, y_axis)
-      when 3
-        true
-      when 2
-        current_status == true
-      else
-        false
-      end
+        alive_neighbors_for_updown(x_axis - 1, y_axis),
+        alive_neighbors_for_lr(x_axis, y_axis),
+        alive_neighbors_for_updown(x_axis + 1, y_axis)
+      ].sum
     end
 
     def add_corners
-      @current_text[0][0] = true
-      @current_text[0][-1] = true
-      @current_text[-1][0] = true
-      @current_text[-1][-1] = true
+      CORNERS.each do |x_axis, y_axis|
+        @current_text[x_axis][y_axis] = true
+      end
     end
 
     def do_one_step
-      @next_step_text = @current_text.each_with_index.map do |line, x_axis|
+      @current_text = @current_text.each_with_index.map do |line, x_axis|
         line.each_with_index.map do |char, y_axis|
-          alive_next?(char, x_axis, y_axis)
+          neighbors = alive_neighbors_for_alt(x_axis, y_axis)
+          next true if neighbors == 3
+          next char if neighbors == 2
+
+          false
         end
       end
-      @current_text = @next_step_text
-      add_corners if @version == 2
     end
 
     def step(steps = 1)
       return if steps < 1
 
-      1.upto(steps) do |_step_idx|
+      1.upto(steps) do
         do_one_step
+        add_corners if @version == 2
       end
     end
 
     def to_i
-      @current_text.flatten.count{|cell| cell == true }
+      @current_text.sum{|line| line.count(true) }
     end
 
     def to_s
