@@ -7,27 +7,26 @@ class Year2016
       @version = input_part_one ? 1 : 2
       @direction = 0
       @position = [0, 0]
-      @visited = [[0, 0]]
+      @visited = Set.new([0, 0])
       do_all_moves(input_data)
     end
 
+    # rubocop:disable Lint/NonLocalExitFromIterator
     def do_all_moves(instructions)
       instructions.split(', ').each do |instruction|
-        one_turn(instruction[0])
-        moves = instruction.scan(/\d+/)[0].to_i
+        @direction = (@direction + (instruction[0] == 'L' ? 3 : 5)) % 4
+        moves = instruction[1..].to_i
         next one_move(moves) if @version == 1
 
         1.upto(moves) do
           one_move(1)
-          @visited.include?(@position) ? break : @visited.push(@position.dup)
+          return if @visited.include?(@position)
+
+          @visited.add(@position.dup)
         end
-        break if @visited[..-2].include?(@position)
       end
     end
-
-    def one_turn(leftright)
-      @direction = (@direction + 4 + (leftright == 'L' ? -1 : 1)) % 4
-    end
+    # rubocop:enable Lint/NonLocalExitFromIterator
 
     def one_move(moves)
       case DIRECTIONS[@direction]
