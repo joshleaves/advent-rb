@@ -7,21 +7,21 @@ describe Year2015::Day11 do
     end
 
     it 'checks first criteria (three straight letters)' do
-      { 'hijklmmn' => :to, 'abbceffg' => :not_to, 'abbcegjk' => :not_to }.each do |input, result|
-        expect(password_class.new(input)).send(result, be_first_criteria)
-      end
+      expect(password_class.new('hijklmmn')).to be_first_criteria
+      expect(password_class.new('abbceffg')).not_to be_first_criteria
+      expect(password_class.new('abbcegjk')).not_to be_first_criteria
     end
 
     it 'checks second criteria (no i/o/l)' do
-      { 'hijklmmn' => :not_to, 'abbceffg' => :to, 'abbcegjk' => :to }.each do |input, result|
-        expect(password_class.new(input)).send(result, be_second_criteria)
-      end
+      expect(password_class.new('hijklmmn')).not_to be_second_criteria
+      expect(password_class.new('abbceffg')).to be_second_criteria
+      expect(password_class.new('abbcegjk')).to be_second_criteria
     end
 
     it 'checks third criteria (two different pairs)' do
-      { 'hijklmmn' => :not_to, 'abbceffg' => :to, 'abbcegjk' => :not_to }.each do |input, result|
-        expect(password_class.new(input)).send(result, be_third_criteria)
-      end
+      expect(password_class.new('hijklmmn')).not_to be_third_criteria
+      expect(password_class.new('abbceffg')).to be_third_criteria
+      expect(password_class.new('abbcegjk')).not_to be_third_criteria
     end
 
     it 'gives a final result' do

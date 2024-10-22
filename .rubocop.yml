@@ -5,10 +5,12 @@ require:
 AllCops:
   NewCops: enable
 
-RSpec/FilePath:
-  SpecSuffixOnly: true
+RSpec/MultipleExpectations:
+  Enabled: false
 RSpec/SpecFilePathFormat:
   Enabled: false
+RSpec/SpecFilePathSuffix:
+  Enabled: true
 
 Layout/DotPosition:
   EnforcedStyle: trailing

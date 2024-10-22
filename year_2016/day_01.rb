@@ -7,7 +7,7 @@ class Year2016
       @version = input_part_one ? 1 : 2
       @direction = 0
       @position = [0, 0]
-      @visited = Set.new([0, 0])
+      @visited = Set.new(@position)
       do_all_moves(input_data)
     end
 

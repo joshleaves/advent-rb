@@ -1,9 +1,13 @@
 source 'https://rubygems.org'
 ruby '3.3.0'
 
-gem 'rspec'
-gem 'rspec-github-actions-formatter'
+group :development do
+  gem 'rubocop'
+  gem 'rubocop-performance'
+  gem 'rubocop-rspec'
+end
 
-gem 'rubocop'
-gem 'rubocop-performance'
-gem 'rubocop-rspec'
+group :test do
+  gem 'rspec'
+  gem 'rspec-github-actions-formatter'
+end
